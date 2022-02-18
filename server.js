@@ -57,6 +57,26 @@ app.post('/addGroup', async (req, res) => {
   }
 })
 
+app.post('/addStudents', async (req, res) => {
+  try {
+    const students = req.body.students
+    const client = await pool.connect()
+    // console.log(req.body.students)
+
+    for (let i of students) {
+      const { rows } = await client.query(
+        'INSERT INTO students (student_name, student_of ) VALUES($1, $2) RETURNING *',
+        [i.student_name, i.student_of]
+      )
+      console.log(rows)
+    }
+    client.release()
+    res.send('qo`shildi🎉')
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.put('/', async (req, res) => {
   try {
     const { group_teacher, group_of } = req.body

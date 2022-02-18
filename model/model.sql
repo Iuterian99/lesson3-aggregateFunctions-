@@ -3,7 +3,7 @@
 CREATE TABLE courses(
   course_id serial PRIMARY KEY,
   course_name varchar(30) not null,
-  course_price = int not null,
+  course_price int not null
 );
 
 CREATE TABLE groups(
